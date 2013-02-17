@@ -6,7 +6,9 @@
 
 #!/bin/bash
 
-REDIS_VERSION=2.4.12
+################## REDIS ##########################
+
+REDIS_VERSION=2.6.10
 MAKE_IS_DONE="no"
 
 if [ ! -d ${OPENSHIFT_DATA_DIR}/redis ]; then
@@ -34,7 +36,7 @@ if [ "$MAKE_IS_DONE" == "yes" ]; then
 < pidfile /var/run/redis.pid
 < 
 ---
-> pidfile ${OPENSHIFT_RUN_DIR}redis.pid
+> pidfile ${OPENSHIFT_DATA_DIR}redis/redis.pid
 24c24
 < port 6379
 ---
@@ -43,7 +45,7 @@ if [ "$MAKE_IS_DONE" == "yes" ]; then
 < # unixsocket /tmp/redis.sock
 < # unixsocketperm 755
 ---
-> unixsocket ${OPENSHIFT_GEAR_DIR}tmp/redis.sock
+> unixsocket ${OPENSHIFT_DATA_DIR}redis/redis.sock
 > unixsocketperm 755
 107c106
 < dir ./
@@ -55,5 +57,4 @@ EOF
 fi
 
 cd ${OPENSHIFT_DATA_DIR}redis
-[ -f ${OPENSHIFT_RUN_DIR}redis.pid ] || ${OPENSHIFT_DATA_DIR}redis/bin/redis-server ${OPENSHIFT_DATA_DIR}redis/bin/redis.conf
-
+[ -f ${OPENSHIFT_DATA_DIR}redis.pid ] || ${OPENSHIFT_DATA_DIR}redis/bin/redis-server ${OPENSHIFT_DATA_DIR}redis/bin/redis.conf

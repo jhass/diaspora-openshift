@@ -1,0 +1,28 @@
+#!/bin/bash
+# This deploy hook gets executed after dependencies are resolved and the
+# build hook has been run but before the application has been started back
+# up again.  This script gets executed directly, so it could be python, php,
+# ruby, etc.
+
+set -e
+
+source ${OPENSHIFT_REPO_DIR}.openshift/action_hooks/diaspora_configuration
+
+if [ -z $OPENSHIFT_MYSQL_DB_HOST ]
+then
+    echo 1>&2
+    echo "Could not find mysql database.  Please run:" 1>&2
+    echo "rhc-ctl-app -a $OPENSHIFT_APP_NAME -e add-mysql-5.1" 1>&2
+    echo "then make a sample commit (add whitespace somewhere) and re-push" 1>&2
+    echo 1>&2
+    exit 5
+fi
+
+pushd ${OPENSHIFT_REPO_DIR} > /dev/null
+echo "Migrating database..."
+bundle exec rake db:migrate RAILS_ENV="production"
+echo "Starting resque worker..."
+PIDFILE="${OPENSHIFT_DATA_DIR}resque.pid" BACKGROUND="yes" QUEUE="*" bundle exec rake resque:work >> ${OPENSHIFT_RUBY_LOG_DIR}/resque_worker.log
+popd > /dev/null
+
+
