@@ -54,6 +54,7 @@ module Configuration
         @git_available = false
       else
         `which git`
+        `git status 2> /dev/null` if $?.success?
         @git_available = $?.success?
       end
     end
