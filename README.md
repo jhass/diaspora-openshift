@@ -1,65 +1,42 @@
-Diaspora*
+# Diaspora* for OpenShift
 
-Diaspora is a privacy-aware, personally-controlled, do-it-all open source social network. Check out our [project site](http://diasporaproject.org).
+Diaspora is a privacy-aware, personally-controlled, do-it-all open source social network. Check out our [project site](http://diasporaproject.org) and the [main repository](https://github.com/diaspora/diaspora).
 
-* **master:** [![Build Status master](https://secure.travis-ci.org/diaspora/diaspora.png?branch=master)](http://travis-ci.org/diaspora/diaspora)
-* **develop:** [![Build Status develop](https://secure.travis-ci.org/diaspora/diaspora.png?branch=develop)](http://travis-ci.org/diaspora/diaspora)
-* [![Dependency Status](https://gemnasium.com/diaspora/diaspora.png?travis)](https://gemnasium.com/diaspora/diaspora)
-* [![Code Climate](https://codeclimate.com/github/diaspora/diaspora.png)](https://codeclimate.com/github/diaspora/diaspora)
+[OpenShift](https://openshift.redhat.com/app/) is a hosting platform by RedHat.
 
+This repository contains modifications to Diaspora for easy deployment.
 
-With Diaspora you can:
+## Installtion
 
-- Make cool stuff
-- Share it across the web
-- Own your own data
+- Create an account on [OpenShift](https://openshift.redhat.com/app/])
+- Create a Ruby on Rails app.
+- Change the source code to `git://github.com/MrZYX/diaspora-openshift.git` while doing that
+- Go to the "Application Overview" page.
+- Grab a coffee.
+- Wait until the apps status  says "Started". This takes quite some time.
 
-
-## Quick Start:
-
-Here's how you can get a **[development](http://guides.rubyonrails.org/getting_started.html)** environment up and running.  This is where any new pod runner should start, as well as people
-looking to contribute to D*.  This script assumes you have [a basic Rails setup installed](http://railsapps.github.com/installing-rails-3-1.html).
-
-### Step 1: Run the script and follow the on screen instructions.
-```
-  bash <(curl https://raw.github.com/diaspora/diaspora/master/script/install.sh)
-```
+## Configuration
+todo
 
 
-### Step 2: Run the development server
-```
-  rails s
-```
+## Updating
 
-then visit 'http://localhost:3000' in your browser.
+### First time setup
 
-### Step 3 (for developers): Run tests
-```
-  rake
-```
+You can also use this to get hold of a local copy so that you can modify your Diaspora.
 
-### Step 4 (for everyone): Party.
+- If you have none yet generate a SSH keypar: `ssh-keygen`.
+-  Grab `~/.ssh/id_rsa.pub` and add it at the [My account](https://openshift.redhat.com/app/account) page under "Public Keys".
+- Install [Git](http://git-scm.org) on your computer.
+- Goto [your applications](https://openshift.redhat.com/app/console/applications) and there to your Diaspora application.
+- Copy the "Git repository" URL
+- Run `git clone your_git_repository_url`
+- Go into it: `cd diaspora`.
+- Run `git remote add upstream git://github.com/MrZYX/diaspora-openshift.git`
 
+###  Every time you need to update
 
-### Want a production setup? Having trouble with install script? Want to install D* the slow way?
-  Look to more specific install guides [here](https://github.com/diaspora/diaspora/wiki/Installation-Guides).
-
-## Contributing
-We love community contributions, and we work extra hard to make sure every code contribution is looked at and given feedback. 
-To help everyone involved, please review our [Pull Request Guidelines](https://github.com/diaspora/diaspora/wiki/Pull-Request-Guidelines)
-to make sure all contributions are submitted smoothly.
-
-Documentation is available on our [wiki](https://github.com/diaspora/diaspora/wiki)
-
-Also, feel free to jump in and check things that need to be done in our [Community Pivotal Tracker](https://www.pivotaltracker.com/projects/61641#)
-
-Before submitting code, please sign our [Contributor License Agreement](https://github.com/diaspora/diaspora/wiki/New-CLA--12-13-10) [Sign Here](https://spreadsheets.google.com/a/joindiaspora.com/spreadsheet/viewform?formkey=dFdRTnY0TGtfaklKQXZNUndsMlJ2eGc6MQ)
-
-## More Resources:
-
-- [Wiki](https://github.com/diaspora/diaspora/wiki)
-- [Podmin Resources](https://github.com/diaspora/diaspora/wiki/Podmin-Resources)
-- [Contributing](https://github.com/diaspora/diaspora/wiki/Getting-Started-With-Contributing)
-- [Dev List](https://groups.google.com/forum/?fromgroups#!forum/diaspora-dev)
-- [Discuss List](https://groups.google.com/forum/?fromgroups#!forum/diaspora-discuss)
-- [IRC](https://github.com/diaspora/diaspora/wiki/How-we-use-IRC)
+- Go into your local clone.
+- Run `git pull upstream master`.
+- Run `git push origin master`.
+- It's time for another coffee again.
