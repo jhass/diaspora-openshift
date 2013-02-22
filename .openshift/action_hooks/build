@@ -57,4 +57,4 @@ EOF
 fi
 
 cd ${OPENSHIFT_DATA_DIR}redis
-[ -f ${OPENSHIFT_DATA_DIR}redis.pid ] || ${OPENSHIFT_DATA_DIR}redis/bin/redis-server ${OPENSHIFT_DATA_DIR}redis/bin/redis.conf
+[ -f ${OPENSHIFT_DATA_DIR}redis/redis.pid ] || ${OPENSHIFT_DATA_DIR}redis/bin/redis-server ${OPENSHIFT_DATA_DIR}redis/bin/redis.conf

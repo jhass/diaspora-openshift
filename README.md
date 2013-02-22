@@ -26,7 +26,7 @@ todo
 You can also use this to get hold of a local copy so that you can modify your Diaspora.
 
 - If you have none yet generate a SSH keypar: `ssh-keygen`.
--  Grab `~/.ssh/id_rsa.pub` and add it at the [My account](https://openshift.redhat.com/app/account) page under "Public Keys".
+- Grab `~/.ssh/id_rsa.pub` and add it at the [My account](https://openshift.redhat.com/app/account) page under "Public Keys".
 - Install [Git](http://git-scm.org) on your computer.
 - Goto [your applications](https://openshift.redhat.com/app/console/applications) and there to your Diaspora application.
 - Copy the "Git repository" URL
@@ -40,3 +40,9 @@ You can also use this to get hold of a local copy so that you can modify your Di
 - Run `git pull upstream master`.
 - Run `git push origin master`.
 - It's time for another coffee again.
+
+## Issues
+
+- There's a new secret token generated on every redeploy, so all users will get logged out on that.
+- There's no straight forward way to configure your pod.
+- There's no straight forward way to add yourself as an admin.
