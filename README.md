@@ -39,7 +39,7 @@ You can also use this to get hold of a local copy so that you can modify your Di
 - Go into your local clone.
 - Run `git pull upstream master`.
 - Run `git push origin master`.
-- It's time for another coffee again.
+- It's time for another coffee.
 
 ## Issues
 
