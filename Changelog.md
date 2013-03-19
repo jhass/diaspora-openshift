@@ -1,3 +1,15 @@
+# 0.0.3.4
+
+* Bump Rails to 3.2.13, fixes CVE-2013-1854, CVE-2013-1855, CVE-2013-1856 and CVE-2013-1857. [Read more](http://weblog.rubyonrails.org/2013/3/18/SEC-ANN-Rails-3-2-13-3-1-12-and-2-3-18-have-been-released/)
+
+# 0.0.3.3
+
+* Switch Gemfile source to https to be compatible with bundler 1.3
+
+# 0.0.3.2
+
+* Fix XSS vulnerability in conversations#new [#4010](https://github.com/diaspora/diaspora/issues/4010)
+
 # 0.0.3.1
 
 * exec foreman in ./script/server to replace the process so that we can Ctrl+C it again.
