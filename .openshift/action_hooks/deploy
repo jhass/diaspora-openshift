@@ -21,12 +21,18 @@ fi
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 echo "Migrating database..."
 bundle exec rake db:migrate RAILS_ENV="production"
-echo "Starting resque worker..."
+echo "Starting Sidekiq worker..."
 if [ -f "${OPENSHIFT_DATA_DIR}resque.pid" ]; then
   kill $(cat "${OPENSHIFT_DATA_DIR}resque.pid")
   rm "${OPENSHIFT_DATA_DIR}resque.pid"
 fi
-PIDFILE="${OPENSHIFT_DATA_DIR}resque.pid" BACKGROUND="yes" QUEUE="*" bundle exec rake resque:work >> ${OPENSHIFT_RUBY_LOG_DIR}/resque_worker.log
+
+if [ -f "${OPENSHIFT_DATA_DIR}sidekiq.pid" ]; then
+  kill $(cat "${OPENSHIFT_DATA_DIR}sidekiq.pid")
+  rm "${OPENSHIFT_DATA_DIR}sidekiq.pid"
+fi
+
+bundle exec sidekiq -d -P "${OPENSHIFT_DATA_DIR}sidekiq.pid"
 popd > /dev/null
 
 
