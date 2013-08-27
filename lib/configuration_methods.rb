@@ -24,7 +24,7 @@ module Configuration
       return @configured_services unless @configured_services.nil?
       
       @configured_services = []
-      [:twitter, :tumblr, :facebook].each do |service|
+      [:twitter, :tumblr, :facebook, :wordpress].each do |service|
         @configured_services << service if services.send(service).enable?
       end
       
@@ -104,13 +104,18 @@ module Configuration
       path.to_s
     end
 
+    def postgres?
+      defined?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter) &&
+      ActiveRecord::Base.connection.is_a?(ActiveRecord::ConnectionAdapters::PostgreSQLAdapter)
+    end
+
     private
 
     def get_git_info
       return if git_info_present? || !git_available?
       
       git_cmd = `git log -1 --pretty="format:%H %ci"`
-      if git_cmd =~ /^([\d\w]+?)\s(.+)$/
+      if git_cmd =~ /^(\w+?)\s(.+)$/
         @git_revision = $1
         @git_update = $2.strip
       end

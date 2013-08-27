@@ -11,6 +11,7 @@ de:
       add_to_aspect: "Kontakt hinzufügen"
       all_aspects: "Alle Aspekte"
       error: "Teilen mit <%= name %> nicht möglich. Ignorierst du sie/ihn?"
+      error_remove: "Konnte <%= name %> nicht aus dem Aspekt entfernen :("
       select_aspects: "Wähle Aspekte aus"
       started_sharing_with: "Du hast angefangen, mit <%= name %> zu teilen!"
       stopped_sharing_with: "Du hast aufgehört, mit <%= name %> zu teilen!"
@@ -29,8 +30,11 @@ de:
     comma: ","
     comments:
       hide: "Kommentare verbergen"
+      no_comments: "Bisher sind keine Kommentare vorhanden."
       show: "Alle Kommentare zeigen"
     confirm_dialog: "Bist du dir sicher?"
+    conversation:
+      participants: "Teilnehmer"
     delete: "Löschen"
     edit: "Bearbeiten"
     failed_to_like: "Gefällt mir fehlgeschlagen!"
@@ -58,6 +62,7 @@ de:
     ignore_user: "Benutzer ignorieren?"
     infinite_scroll:
       no_more: "Keine weiteren Beiträge."
+      no_more_contacts: "Keine weiteren Kontakte."
     my_activity: "Meine Aktivitäten"
     my_aspects: "Meine Aspekte"
     my_stream: "Stream"
@@ -65,11 +70,14 @@ de:
       not_found: "und niemand wurde gefunden..."
     photo_uploader:
       completed: "<%= file %> hochgeladen"
+      empty: "Die Datei {file} ist leer. Bitte treffen sie eine erneute Auswahl ohne diese Datei."
+      invalid_ext: "{file} hat eine ungültige Erweiterung. Nur {extensions} sind erlaubt."
       looking_good: "OMG, du siehst toll aus!"
       size_error: "{file} ist zu groß. Die maximale Dateigröße beträgt {sizeLimit}."
     publisher:
       at_least_one_aspect: "Du musst zumindest zu einem Aspekt posten"
       limited: "Eingeschränkt - dein Beitrag wird nur Leuten sichtbar sein, mit denen du teilst"
+      near_from: "Gesendet aus <%= location %>"
       public: "Öffentlich - dein Beitrag ist für alle sichtbar und kann von Suchmaschinen gefunden werden"
     reshares:
       duplicate: "Du hast diesen Beitrag bereits weitergesagt!"

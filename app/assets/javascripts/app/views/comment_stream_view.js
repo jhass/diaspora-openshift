@@ -53,7 +53,7 @@ app.views.CommentStream = app.views.Base.extend({
   },
 
   keyDownOnCommentBox: function(evt) {
-    if(evt.keyCode == 13 && evt.shiftKey) {
+    if(evt.keyCode == 13 && evt.ctrlKey) {
       this.$("form").submit()
       return false;
     }
@@ -76,8 +76,7 @@ app.views.CommentStream = app.views.Base.extend({
   expandComments: function(evt){
     if(evt){ evt.preventDefault(); }
 
-    var localCommentValue = this.$("textarea").val(),
-      self = this;
+    self = this;
 
     this.model.comments.fetch({
       success : function(resp){
@@ -87,8 +86,6 @@ app.views.CommentStream = app.views.Base.extend({
         })
 
         self.model.trigger("commentsExpanded", self)
-
-        self.$("textarea").val(localCommentValue).focus()
       }
     });
   }

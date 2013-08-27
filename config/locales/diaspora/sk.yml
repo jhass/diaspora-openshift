@@ -45,6 +45,7 @@ sk:
       correlations: "Závislosti"
       pages: "Stránky"
       pod_stats: "Štatistiky servera"
+      sidekiq_monitor: "Monitor Sidekiq"
       user_search: "Používateľské vyhľadávanie"
       weekly_user_stats: "Štatistiky používateľa za týždeň"
     correlations:
@@ -83,6 +84,7 @@ sk:
     user_search:
       add_invites: "pridať pozvánky"
       email_to: "Pozvi e-mailom"
+      under_13: "Zobraziť používateľov mladších ako 13 rokov (COPPA)"
       users:
         few: "našli sa %{count} používatelia"
         one: "našiel sa %{count} používateľ"
@@ -290,6 +292,8 @@ sk:
     two: "%{count} kontakty"
     zero: "kontaktov"
   conversations:
+    conversation:
+      participants: "Účastníci"
     create:
       fail: "Neplatná správa"
       no_contact: "Pozor, najprv treba pridať kontakt!"
@@ -344,7 +348,7 @@ sk:
   invitations:
     a_facebook_user: "Používateľ(ka) Facebooku"
     check_token:
-      not_found: "Pozývací reťazec sa nenašiel"
+      not_found: "Číslo pozvánky sa nenašlo"
     create:
       already_contacts: "Tohto človeka si už kontaktoval(a)."
       already_sent: "Tohto človeka si už pozval(a)."
@@ -375,6 +379,7 @@ sk:
       resend: "Preposlať"
       send_an_invitation: "Poslať pozvánku"
       send_invitation: "Poslať pozvánku"
+      sending_invitation: "Posiela sa pozvánka..."
       to: "Príjemcovia"
   layouts:
     application:
@@ -382,7 +387,7 @@ sk:
       powered_by: "PREVÁDZKUJE DIASPORA*"
       public_feed: "Verejný kanál Diaspory pre %{name}"
       source_package: "stiahnuť balík so zdrojovým kódom"
-      toggle: "prepnúť na stránku pre mobil"
+      toggle: "prepnúť mobilnú verziu"
       whats_new: "Čo je nové?"
       your_aspects: "Tvoje kategórie"
     header:
@@ -553,6 +558,7 @@ sk:
       edit_membership: "upraviť členstvo v kategórii"
     few: "%{count} ľudia"
     helper:
+      is_sharing: "%{name} sa s Tebou o niečo delí"
       people_on_pod_are_aware_of: "Ľudia na pode sú si vedomí"
       results_for: "výsledky pre %{params}"
     index:
@@ -711,7 +717,7 @@ sk:
       password_confirmation: "POTVRDENIE HESLA"
       sign_up: "ZAREGISTROVAŤ SA"
       sign_up_message: "Prepojenie cez sociálne siete s ♥"
-      username: "POUŽÍVATEĽSKÉ MENO"
+      username: "POUŽÍVATEĽ"
   requests:
     create:
       sending: "Posiela sa"
@@ -769,6 +775,7 @@ sk:
       logged_in_as: "prihlásil(a) si sa ako"
       no_services: "Ešte si svoj účet nepripojil(a) na žiadne ďalšie služby."
       really_disconnect: "Chceš sa odhlásiť zo služby %{service}?"
+      services_explanation: "Pripojenie k službám Ti umožňuje publikovať na nich príspevky, len čo ich napíšeš na Diasporu."
     inviter:
       click_link_to_accept_invitation: "Ak chcete prijať pozvanie, kliknite na tento odkaz"
       join_me_on_diaspora: "Pridať sa k DIASPORE*"
@@ -827,6 +834,7 @@ sk:
       all: "všetko"
       all_contacts: "Všetky kontakty"
       discard_post: "Vymazať príspevok"
+      get_location: "Vypísať tvoju polohu"
       make_public: "Zverejniť"
       new_user_prefill:
         hello: "Hej, všetci, som #%{new_user_tag}. "
@@ -835,6 +843,7 @@ sk:
         newhere: "Nováčik"
       post_a_message_to: "Poslať správu na %{aspect}"
       posting: "Posiela sa..."
+      preview: "Ukážka"
       publishing_to: "Publikuje sa na: "
       share: "Uverejniť"
       share_with: "podeliť sa s"
@@ -922,7 +931,7 @@ sk:
   tags:
     show:
       follow: "Sledovať #%{tag}"
-      followed_by: "sleduje"
+      followed_by: "sleduje ho alebo ju"
       following: "Sleduješ #%{tag}"
       nobody_talking: "Nikto ešte nehovorí o téme %{tag}."
       none: "Prázdna značka neexistuje!"
@@ -969,7 +978,7 @@ sk:
         make_diaspora_better: "Chceme, aby si nám pomohol (-la) vylepšiť Diasporu, a tak by si nám mal(a) pomôcť namiesto odchodu. Ak chceš odísť, chceme, aby si vedel(a), čo sa bude diať ďalej."
         mr_wiggles: "Pán Wiggles bude smutný, že odchádzaš"
         no_turning_back: "Momentálne sa to nedá vrátiť späť."
-        what_we_delete: "Zmažeme všetky tvoje príspevky, údaje v profile tak skoro, ako je to v ľudských silách možné. Tvoje komentáre budú kade-tade, ale budú priradené k tvojej ID adrese na Diasporu."
+        what_we_delete: "Zmažeme všetky tvoje príspevky a údaje v profile tak skoro, ako je to v ľudských silách možné. Tvoje komentáre budú kade-tade, ale budú priradené k tvojej ID adrese na Diasporu a nie k tvojmu menu."
       close_account_text: "Zrušiť účet"
       comment_on_post: "...niekto okomentuje tvoj príspevok?"
       current_password: "Súčasné heslo"

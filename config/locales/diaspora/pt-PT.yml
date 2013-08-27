@@ -45,6 +45,7 @@ pt-PT:
       correlations: "Correlações"
       pages: "Páginas"
       pod_stats: "Estatísticas do Pod"
+      sidekiq_monitor: "Monitor Sidekiq"
       user_search: "Pesquisar Utilizador"
       weekly_user_stats: "Estatísticas Semanais de Utilizador"
     correlations:
@@ -79,6 +80,7 @@ pt-PT:
     user_search:
       add_invites: "adicionar convites"
       email_to: "Email para Convite"
+      under_13: "Mostrar utilizadores menores de 13 anos (COPPA)"
       users:
         one: "%{count} utilizador encontrado"
         other: "%{count} utilizadores encontrados"
@@ -284,6 +286,8 @@ pt-PT:
     two: "%{count} contactos"
     zero: "contactos"
   conversations:
+    conversation:
+      participants: "Participantes"
     create:
       fail: "Mensagem inválida"
       no_contact: "Cuidado, tens de adicionar o contacto primeiro!"
@@ -368,6 +372,7 @@ pt-PT:
       resend: "Reenviar"
       send_an_invitation: "Envie um convite"
       send_invitation: "Enviar convite"
+      sending_invitation: "Enviando convite..."
       to: "Para"
   layouts:
     application:
@@ -391,7 +396,7 @@ pt-PT:
   likes:
     likes:
       people_dislike_this:
-        one: "%{count} pessoas não gostam"
+        one: "%{count} pessoa não gosta"
         other: "%{count} pessoas não gostam"
         zero: "nenhuma pessoa não gosta disto"
       people_like_this:
@@ -550,6 +555,7 @@ pt-PT:
       edit_membership: "editar a participação no grupo"
     few: "%{count} pessoas"
     helper:
+      is_sharing: "%{name} está a partilhar consigo"
       people_on_pod_are_aware_of: "as pessoas no pod estão cientes de que"
       results_for: "resultados para %{params}"
     index:
@@ -769,6 +775,7 @@ pt-PT:
       logged_in_as: "com sessão registada como"
       no_services: "Ainda não conectou quaisquer serviços."
       really_disconnect: "desligar do %{service}?"
+      services_explanation: "A conexão com serviços externos permite que você publique as suas publicações nesses serviços ao mesmo tempo em que publica no Diaspora."
     inviter:
       click_link_to_accept_invitation: "Siga esta hiperligação para aceitar o seu convite"
       join_me_on_diaspora: "Junte-se a mim no DIASPORA*"
@@ -829,6 +836,7 @@ pt-PT:
       all: "tudo"
       all_contacts: "todos os contactos"
       discard_post: "Rejeitar a publicação"
+      get_location: "Obter a sua localização"
       make_public: "tornar público"
       new_user_prefill:
         hello: "Olá a todos, sou #%{new_user_tag}. "
@@ -837,6 +845,7 @@ pt-PT:
         newhere: "NovoAqui"
       post_a_message_to: "Publicar uma mensagem em %{aspect}"
       posting: "A publicar..."
+      preview: "Pré-visualizar"
       publishing_to: "publicando para:"
       share: "Partilhar"
       share_with: "partilhar com"

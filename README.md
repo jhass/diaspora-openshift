@@ -1,4 +1,4 @@
-# Diaspora* for OpenShift
+# diaspora* for OpenShift
 
 Diaspora is a privacy-aware, personally-controlled, do-it-all open source social network. Check out our [project site](http://diasporaproject.org) and the [main repository](https://github.com/diaspora/diaspora).
 

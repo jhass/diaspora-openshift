@@ -8,6 +8,7 @@ app.views.StreamPost = app.views.Post.extend({
     ".comments" : "commentStreamView",
     ".post-content" : "postContentView",
     ".oembed" : "oEmbedView",
+    ".opengraph" : "openGraphView",
     ".status-message-location" : "postLocationStreamView"
   },
 
@@ -21,7 +22,7 @@ app.views.StreamPost = app.views.Post.extend({
     "click .block_user": "blockUser"
   },
 
-  tooltipSelector : ".timeago, .delete, .block_user, .post_scope, .ignore",
+  tooltipSelector : ".timeago, .post_scope, .block_user, .delete",
 
   initialize : function(){
     this.model.bind('remove', this.remove, this);
@@ -29,6 +30,7 @@ app.views.StreamPost = app.views.Post.extend({
     //subviews
     this.commentStreamView = new app.views.CommentStream({model : this.model});
     this.oEmbedView = new app.views.OEmbed({model : this.model});
+    this.openGraphView = new app.views.OpenGraph({model : this.model});
   },
 
 

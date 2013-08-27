@@ -15,8 +15,7 @@ class User < ActiveRecord::Base
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :token_authenticatable, :lockable, :lock_strategy => :none,
-         :unlock_strategy => :none
+         :lockable, :lock_strategy => :none, :unlock_strategy => :none
 
   before_validation :strip_and_downcase_username
   before_validation :set_current_language, :on => :create
@@ -24,7 +23,7 @@ class User < ActiveRecord::Base
   validates :username, :presence => true, :uniqueness => true
   validates_format_of :username, :with => /\A[A-Za-z0-9_]+\z/
   validates_length_of :username, :maximum => 32
-  validates_exclusion_of :username, :in => USERNAME_BLACKLIST
+  validates_exclusion_of :username, :in => AppConfig.settings.username_blacklist
   validates_inclusion_of :language, :in => AVAILABLE_LANGUAGE_CODES
   validates_format_of :unconfirmed_email, :with  => Devise.email_regexp, :allow_blank => true
 
@@ -64,24 +63,8 @@ class User < ActiveRecord::Base
 
   has_many :notifications, :foreign_key => :recipient_id
 
-
   before_save :guard_unconfirmed_email,
               :save_person!
-
-  attr_accessible :username,
-                  :email,
-                  :getting_started,
-                  :password,
-                  :password_confirmation,
-                  :language,
-                  :disable_mail,
-                  :invitation_service,
-                  :invitation_identifier,
-                  :show_community_spotlight_in_stream,
-                  :auto_follow_back,
-                  :auto_follow_back_aspect_id,
-                  :remember_me
-
 
   def self.all_sharing_with_person(person)
     User.joins(:contacts).where(:contacts => {:person_id => person.id})
@@ -343,6 +326,8 @@ class User < ActiveRecord::Base
       params[:image_url_small] = photo.url(:thumb_small)
     end
 
+    params.stringify_keys!
+    params.slice!(*(Profile.column_names+['tag_string', 'date']))
     if self.profile.update_attributes(params)
       deliver_profile_update
       true
@@ -351,13 +336,17 @@ class User < ActiveRecord::Base
     end
   end
 
+  def update_profile_with_omniauth( user_info )
+    update_profile( self.profile.from_omniauth_hash( user_info ) )
+  end 
+
   def deliver_profile_update
     Postzord::Dispatcher.build(self, profile).post
   end
 
   ###Helpers############
   def self.build(opts = {})
-    u = User.new(opts)
+    u = User.new(opts.except(:person))
     u.setup(opts)
     u
   end
@@ -392,8 +381,8 @@ class User < ActiveRecord::Base
     self.aspects.create(:name => I18n.t('aspects.seed.work'))
     aq = self.aspects.create(:name => I18n.t('aspects.seed.acquaintances'))
 
-    if AppConfig.settings.follow_diasporahq?
-      default_account = Webfinger.new('diasporahq@joindiaspora.com').fetch
+    if AppConfig.settings.autofollow_on_join?
+      default_account = Webfinger.new(AppConfig.settings.autofollow_on_join_user).fetch
       self.share_with(default_account, aq) if default_account
     end
     aq

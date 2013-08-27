@@ -1,5 +1,4 @@
-require 'pathname'
-require Pathname.new(__FILE__).expand_path.dirname.join('load_config')
+require File.expand_path('../load_config', __FILE__)
 
 # Enable and set these to run the worker as a different user/group
 #user  = 'diaspora'
@@ -11,7 +10,7 @@ worker_processes AppConfig.server.unicorn_worker.to_i
 preload_app true
 
 # How long to wait before killing an unresponsive worker
-timeout 30
+timeout AppConfig.server.unicorn_timeout.to_i
 
 @sidekiq_pid = nil
 

@@ -80,6 +80,7 @@ fr:
     user_search:
       add_invites: "ajouter des invitations"
       email_to: "Adresse électronique de la personne à inviter"
+      under_13: "Afficher les utilisateurs de moins de 13 ans"
       users:
         one: "%{count} utilisateur trouvé"
         other: "%{count} utilisateurs trouvés"
@@ -285,6 +286,8 @@ fr:
     two: "%{count} contacts"
     zero: "contact"
   conversations:
+    conversation:
+      participants: "Participants"
     create:
       fail: "Message invalide"
       no_contact: "Hé, vous avez besoin d'ajouter le contact d'abord !"
@@ -369,6 +372,7 @@ fr:
       resend: "Envoyer à nouveau"
       send_an_invitation: "Envoyer une invitation"
       send_invitation: "Envoyer l'invitation"
+      sending_invitation: "Invitation en cours ..."
       to: "À"
   layouts:
     application:
@@ -537,6 +541,7 @@ fr:
       edit_membership: "modifier l'appartenance à vos aspects"
     few: "%{count} personnes"
     helper:
+      is_sharing: "%{name} partage avec vous"
       people_on_pod_are_aware_of: "les personnes sur le pod sont au courant de"
       results_for: "résultats pour %{params}"
     index:
@@ -561,7 +566,7 @@ fr:
       edit_my_profile: "Modifier mon profil"
       gender: "Sexe"
       in_aspects: "dans les aspects"
-      location: "localisation"
+      location: "Localisation"
       remove_contact: "supprimer ce contact"
       remove_from: "Supprimer %{name} de %{aspect} ?"
     show:
@@ -688,7 +693,7 @@ fr:
       enter_password: "Saisissez un mot de passe (d'au moins six caractères)"
       enter_password_again: "Saisissez à nouveau le même mot de passe"
       enter_username: "Choisissez un nom d'utilisateur (uniquement des lettres, chiffres et caractères de soulignement)"
-      hey_make: "HE !<br/>FAITES<br/>QUELQUE CHOSE."
+      hey_make: "HÉ !<br/>FAÎTES<br/>QUELQUE CHOSE."
       join_the_movement: "Rejoignez le mouvement !"
       password: "MOT DE PASSE"
       password_confirmation: "CONFIRMATION DU MOT DE PASSE"
@@ -738,6 +743,7 @@ fr:
     create:
       already_authorized: "Un utilisateur dont l'id diaspora est %{diaspora_id} a déjà autorisé ce compte %{service_name}."
       failure: "L'authentification a échoué."
+      read_only_access: "Accès en lecture seule, veuillez réessayer d'autoriser plus tard"
       success: "Authentification réussie."
     destroy:
       success: "Authentification supprimée."
@@ -808,7 +814,7 @@ fr:
       control_your_audience: "Contrôlez votre audience"
       logged_in: "connecté(e) à %{service}"
       manage: "Gérer les services connectés"
-      new_user_welcome_message: "Utilisez les #tags pour classer vos messages et trouver des personnes qui partagent vos intérêts. Interpelez des personnes géniales avec les @Mentions"
+      new_user_welcome_message: "Utilisez les #tags pour classer vos messages et trouver des personnes qui partagent vos intérêts. Interpellez des personnes géniales avec les @Mentions"
       outside: "Les messages publics pourront être vus par d'autres en dehors de Diaspora."
       share: "Partager"
       title: "Mettre en place des services connectés"
@@ -817,6 +823,7 @@ fr:
       all: "tous"
       all_contacts: "tous les contacts"
       discard_post: "Supprimer la publication"
+      get_location: "Ajouter votre emplacement"
       make_public: "rendre public"
       new_user_prefill:
         hello: "Bonjour tout le monde, je suis #%{new_user_tag}. "

@@ -4,7 +4,7 @@
 
 defaults:
   version:
-    number: "0.1.0.1" # Do not touch unless doing a release, do not backport the version number that's in master but keep develp to always say "head"
+    number: "0.2.0.0" # Do not touch unless doing a release, do not backport the version number that's in master but keep develp to always say "head"
   heroku: false
   environment:
     url: "http://localhost:3000/"
@@ -17,7 +17,7 @@ defaults:
       concurrency: 5
       retry: 10
       backtrace: 15
-      log: "log/sidekiq.log"
+      log: 'log/sidekiq.log'
     s3:
       enable: false
       key:
@@ -38,6 +38,7 @@ defaults:
     stdout_log:
     database: 'mysql'
     unicorn_worker: 2
+    unicorn_timeout: 90
     embed_sidekiq_worker: false
     sidekiq_workers: 1
   privacy:
@@ -50,17 +51,35 @@ defaults:
     mixpanel_uid:
     chartbeat_uid:
   settings:
-    pod_name: "Diaspora*"
+    pod_name: 'diaspora*'
     enable_registrations: true
-    follow_diasporahq: true
+    autofollow_on_join: true
+    autofollow_on_join_user: 'diasporahq@joindiaspora.com'
     invitations:
       open: true
       count: 25
     paypal_hosted_button_id:
+    bitcoin_wallet_id:
     community_spotlight:
       enable: false
       suggest_email:
     typhoeus_verbose: false
+    typhoeus_concurrency: 20
+    username_blacklist:
+      - 'admin'
+      - 'administrator'
+      - 'hostmaster'
+      - 'info'
+      - 'postmaster'
+      - 'root'
+      - 'ssladmin'
+      - 'ssladministrator'
+      - 'sslwebmaster'
+      - 'sysadmin'
+      - 'webmaster'
+      - 'support'
+      - 'contact'
+      - 'example_user1dsioaioedfhgoiesajdigtoearogjaidofgjo'
   services:
     facebook:
       enable: false
@@ -71,6 +90,10 @@ defaults:
       key:
       secret:
     tumblr:
+      enable: false
+      key:
+      secret:
+    wordpress:
       enable: false
       key:
       secret:
@@ -104,18 +127,20 @@ development:
   server:
     unicorn_worker: 1
   settings:
-    follow_diasporahq: false
+    autofollow_on_join: false
+    autofollow_on_join_user: ''
 production:
   i_am_a_dummy: # Remove if you add an actual override
 test:
   environment:
-    url: "http://localhost:9887/"
+    url: 'http://localhost:9887/'
     single_process_mode: true
     require_ssl: false
     assets:
       serve: true
   settings:
-    follow_diasporahq: false
+    autofollow_on_join: false
+    autofollow_on_join_user: ''
     invitations:
       open: true
   services:
@@ -127,14 +152,14 @@ test:
     enable: true
 integration1:
   environment:
-    url: "http://localhost:45789/"
+    url: 'http://localhost:45789/'
     single_process_mode: true
     assets:
       serve: true
     require_ssl: false
 integration2:
   environment:
-    url: "http://localhost:34658/"
+    url: 'http://localhost:34658/'
     single_process_mode: true
     assets:
       serve: true

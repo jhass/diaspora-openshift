@@ -10,11 +10,28 @@ $(document).ready(function(){
     $("html").scrollTop($('#first_unread').offset().top-45);
   }
 
-  $('a.conversation').live('click', function(){
-    $.getScript(this.href, function() {
+  $('time.timeago').each(function(i,e) {
+    var jqe = $(e);
+    jqe.attr('data-original-title', new Date(jqe.attr('datetime')).toLocaleString());
+    jqe.attr('title', '');
+  });
+
+  $('.timeago').tooltip();
+  $('.timeago').timeago();
+
+  $('time.timeago').each(function(i,e) {
+    var jqe = $(e);
+    jqe.attr('title', '');
+  });
+
+  $('.conversation-wrapper').live('click', function(){
+    var conversation_path = $(this).data('conversation-path');
+
+    $.getScript(conversation_path, function() {
       Diaspora.page.directionDetector.updateBinds();
     });
-    history.pushState(null, "", this.href);
+
+    history.pushState(null, "", conversation_path);
 
     var conv = $(this).children('.stream_element'),
         cBadge = $("#message_inbox_badge .badge_count");
@@ -31,7 +48,6 @@ $(document).ready(function(){
       });
     }
 
-    jQuery("abbr.timeago").timeago();
     return false;
   });
 
@@ -62,7 +78,7 @@ $(document).ready(function(){
     loadingText: "",
     loadingImg: '/assets/ajax-loader.gif'
   }, function(){
-    $('.conversation', '.stream').bind('mousedown', function(){
+    $('.conversation-wrapper', '.stream').bind('mousedown', function(){
       bindIt($(this));
     });
   });
@@ -86,6 +102,36 @@ $(document).ready(function(){
      $('html, body').animate({scrollTop:$(window).height()}, 'medium', function(){
       $('#message_text').focus();
      });
+  });
+
+  $('.participants_link').popover({
+    html: true,
+    title: function(){
+       return Diaspora.I18n.t('conversation.participants') + '<a href="#" class="close"><div class="icons-deletelabel"></div></a>';
+    },
+    content: function() {
+      var conv_id = $(this).data('conversation-id');
+      return $('[data-content-conversation-id="' + conv_id + '"]').html();
+    },
+    trigger: 'manual'
+  });
+  
+  $('.participants_link > span').tooltip({placement: 'bottom'});
+
+  $('.participants_link').click(function(e) {
+    e.stopPropagation();
+    var self = $(this);
+    self.popover('show');
+    var popup = self.data('popover').$tip[0];
+
+    // attach tooltips to each avatar showing the name
+    $(popup).find('.avatar').tooltip({ placement: 'bottom' });
+
+    // register handler for the close button
+    var close = $(popup).find('.close');
+    close.click(function(){
+      self.popover('hide');
+    })
   });
 });
 
