@@ -1,10 +1,12 @@
 # diaspora* for OpenShift
 
-Diaspora is a privacy-aware, personally-controlled, do-it-all open source social network. Check out our [project site](http://diasporaproject.org) and the [main repository](https://github.com/diaspora/diaspora).
+diaspora* is a privacy-aware, personally-controlled, do-it-all open source social network. Check out our [project site](https://diasporafoundation.org) and the [main repository](https://github.com/diaspora/diaspora).
 
 [OpenShift](https://openshift.redhat.com/app/) is a hosting platform by RedHat.
 
-This repository contains modifications to Diaspora for easy deployment.
+This repository contains modifications to diaspora* for easy deployment.
+
+**NOTE:** The status of this is experimental, OpenShift lacks a sane mechanism for configuration management. Until that changes I won't further develop this and wouldn't recommend to actually run diaspora* on OpenShift.
 
 ## Installtion
 
@@ -23,7 +25,7 @@ todo
 
 ### First time setup
 
-You can also use this to get hold of a local copy so that you can modify your Diaspora.
+You can also use this to get hold of a local copy so that you can modify your diaspora*.
 
 - If you have none yet generate a SSH keypar: `ssh-keygen`.
 - Grab `~/.ssh/id_rsa.pub` and add it at the [My account](https://openshift.redhat.com/app/account) page under "Public Keys".
