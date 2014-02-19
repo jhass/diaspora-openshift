@@ -1,3 +1,15 @@
+# 0.3.0.3
+
+* Bump Rails to 3.2.17, fixes CVE-2014-0081, CVE-2014-0082. For more information see http://weblog.rubyonrails.org/2014/2/18/Rails_3_2_17_4_0_3_and_4_1_0_beta2_have_been_released/
+
+# 0.3.0.2
+
+## Bug fixes
+* Use youtube HTTPS scheme for oEmbed [#4743](https://github.com/diaspora/diaspora/pull/4743)
+* Fix infinite scroll on aspect streams [#4729](https://github.com/diaspora/diaspora/issues/4729)
+* Fix hovercards [#4782](https://github.com/diaspora/diaspora/pull/4782)
+* Bump kaminari to fix admin panel [#4714](https://github.com/diaspora/diaspora/issues/4714)
+
 # 0.3.0.1
 
 ## Bug fixes
