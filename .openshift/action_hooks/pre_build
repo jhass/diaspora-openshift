@@ -1,0 +1,14 @@
+#!/bin/bash
+# This is a simple script and will be executed on your CI system if
+# available.  Otherwise it will execute while your application is stopped
+# before the build step.  This script gets executed directly, so it
+# could be python, php, ruby, etc.
+
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+
+if [ -z "$BUNDLE_WITHOUT" ]; then
+  export BUNDLE_WITHOUT='development test'
+  if [ "$(type -t set_env_var)" == "function" ]; then
+    set_env_var 'BUNDLE_WITHOUT' "$BUNDLE_WITHOUT" $OPENSHIFT_HOMEDIR/.env/user_vars
+  fi
+fi

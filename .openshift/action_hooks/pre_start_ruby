@@ -13,5 +13,18 @@
 # Application start and stop is subject to different timeouts
 # throughout the system.
 
+# If there is no support for user-defined environment variables
+# set the RAILS_DB using export.
+#
+if ! [ "$(type -t set_env_var)" == "function" ]; then
+  if [ ! -z "$OPENSHIFT_POSTGRESQL_DB_HOST" ]; then
+    export RAILS_DB="postgresql"
+  fi
 
-source ${OPENSHIFT_REPO_DIR}.openshift/action_hooks/diaspora_configuration
+  if [ ! -z "$OPENSHIFT_MYSQL_DB_HOST" ]; then
+    export RAILS_DB="mysql"
+  fi
+
+fi
+
+source "${OPENSHIFT_REPO_DIR}.openshift/diaspora_configuration"

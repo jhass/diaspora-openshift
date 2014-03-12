@@ -1,0 +1,4 @@
+export OPENSHIFT="true" \
+       ENVIRONMENT_CERTIFICATE_AUTHORITIES="/etc/pki/tls/certs/ca-bundle.crt" \
+       ENVIRONMENT_SIDEKIQ_LOG="${OPENSHIFT_RUBY_LOG_DIR}/sidekiq_worker.log" \
+       REDIS_URL="redis://:${REDIS_PASSWORD}@${OPENSHIFT_REDIS_HOST}:${OPENSHIFT_REDIS_PORT}/"

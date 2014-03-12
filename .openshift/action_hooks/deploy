@@ -4,35 +4,60 @@
 # up again.  This script gets executed directly, so it could be python, php,
 # ruby, etc.
 
+source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source "${OPENSHIFT_REPO_DIR}.openshift/diaspora_configuration"
+
 set -e
 
-source ${OPENSHIFT_REPO_DIR}.openshift/action_hooks/diaspora_configuration
+if [ ! -z "$OPENSHIFT_POSTGRESQL_DB_HOST" ]; then
+  export RAILS_DB="postgresql"
+fi
 
-if [ -z $OPENSHIFT_MYSQL_DB_HOST ]
-then
-    echo 1>&2
-    echo "Could not find mysql database.  Please run:" 1>&2
-    echo "rhc-ctl-app -a $OPENSHIFT_APP_NAME -e add-mysql-5.1" 1>&2
-    echo "then make a sample commit (add whitespace somewhere) and re-push" 1>&2
-    echo 1>&2
-    exit 5
+if [ ! -z "$OPENSHIFT_MYSQL_DB_HOST" ]; then
+  export RAILS_DB="mysql"
+fi
+
+if [ -z "$RAILS_DB" ]; then
+  echo 1>&2
+  echo "Could not find the database cartridge.  Please run:" 1>&2
+  echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c mysql-5.1" 1>&2
+  echo "or"
+  echo "rhc cartridge add -a $OPENSHIFT_APP_NAME -c postgresql-9.2" 1>&2
+  echo "then make a sample commit (add whitespace somewhere) and re-push" 1>&2
+  echo 1>&2
+  exit 5
+else
+  if [ "$(type -t set_env_var)" == "function" ]; then
+    set_env_var 'RAILS_DB' $RAILS_DB $OPENSHIFT_HOMEDIR/.env/user_vars
+  fi
+fi
+
+if [ -z "$SECRET_TOKEN" ]; then
+  export SECRET_TOKEN=$(random_string 60 'a-f0-9')
+  set_env_var 'SECRET_TOKEN' "$SECRET_TOKEN" $OPENSHIFT_HOMEDIR/.env/user_vars
+fi
+
+if [ -z "$RAILS_ENV" ]; then
+  export RAILS_ENV=production
+  set_env_var 'RAILS_ENV' "$RAILS_ENV" $OPENSHIFT_HOMEDIR/.env/user_vars
+fi
+
+if [ -z "$ENVIRONMENT_URL" ]; then
+  export ENVIRONMENT_URL="https://${OPENSHIFT_APP_DNS}/"
+  set_env_var 'ENVIRONMENT_URL' "$ENVIRONMENT_URL" $OPENSHIFT_HOMEDIR/.env/user_vars
 fi
 
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
-echo "Migrating database..."
-bundle exec rake db:migrate RAILS_ENV="production"
-echo "Starting Sidekiq worker..."
-if [ -f "${OPENSHIFT_DATA_DIR}resque.pid" ]; then
-  kill $(cat "${OPENSHIFT_DATA_DIR}resque.pid")
-  rm "${OPENSHIFT_DATA_DIR}resque.pid"
-fi
+
+echo "exec rake db:migrate assets:precompile RAILS_ENV=${RAILS_ENV:-production}"
+bundle exec rake db:migrate assets:precompile RAILS_ENV=${RAILS_ENV:-production}
 
 if [ -f "${OPENSHIFT_DATA_DIR}sidekiq.pid" ]; then
-  kill $(cat "${OPENSHIFT_DATA_DIR}sidekiq.pid")
-  rm "${OPENSHIFT_DATA_DIR}sidekiq.pid"
+   kill $(cat "${OPENSHIFT_DATA_DIR}sidekiq.pid") || true
+   rm "${OPENSHIFT_DATA_DIR}sidekiq.pid"
 fi
 
-bundle exec sidekiq -d -P "${OPENSHIFT_DATA_DIR}sidekiq.pid"
+echo "exec sidekiq -d -P '${OPENSHIFT_DATA_DIR}sidekiq.pid' -L '$ENVIRONMENT_SIDEKIQ_LOG'"
+bundle exec "sidekiq -d -P '${OPENSHIFT_DATA_DIR}sidekiq.pid' -L '$ENVIRONMENT_SIDEKIQ_LOG'"
+
 popd > /dev/null
-
-

@@ -33,7 +33,7 @@ module Configuration
     attr_writer :configured_services
 
     def secret_token
-      if heroku?
+      if heroku? || openshift?
         return ENV['SECRET_TOKEN'] if ENV['SECRET_TOKEN']
         warn "FATAL: Running on Heroku with SECRET_TOKEN unset"
         warn "       Run heroku config:add SECRET_TOKEN=#{SecureRandom.hex(40)}"

@@ -13,13 +13,13 @@ config_dir = File.join rails_root, 'config'
 AppConfig ||= Configurate::Settings.create do
   add_provider Configurate::Provider::Dynamic
   add_provider Configurate::Provider::Env
-  
-  unless heroku? || openshift? || rails_env == "test" || File.exists?(config_dir.join("diaspora.yml"))
+
+  unless heroku? || openshift? || rails_env == "test" || File.exists?(File.join(config_dir, "diaspora.yml"))
     $stderr.puts "FATAL: Configuration not found. Copy over diaspora.yml.example"
     $stderr.puts "       to diaspora.yml and edit it to your needs."
     exit!
   end
-  
+
   add_provider Configurate::Provider::YAML,
                File.join(config_dir, 'diaspora.yml'),
                namespace: rails_env, required: false unless rails_env == 'test'
@@ -34,7 +34,7 @@ AppConfig ||= Configurate::Settings.create do
                namespace: "defaults"
 
   extend Configuration::Methods
-  
+
   if rails_env == "production"  &&
     (environment.certificate_authorities.nil? ||
      environment.certificate_authorities.empty? ||

@@ -6,45 +6,47 @@ diaspora* is a privacy-aware, personally-controlled, do-it-all open source socia
 
 This repository contains modifications to diaspora* for easy deployment.
 
-**NOTE:** The status of this is experimental, OpenShift lacks a sane mechanism for configuration management. Until that changes I won't further develop this and wouldn't recommend to actually run diaspora* on OpenShift.
-
 ## Installtion
 
-- Create an account on [OpenShift](https://openshift.redhat.com/app/])
-- Create a Ruby on Rails app.
-- Change the source code to `git://github.com/MrZYX/diaspora-openshift.git` while doing that
-- Go to the "Application Overview" page.
+- Create an account on [OpenShift](https://openshift.redhat.com/app/)
+- Install the CLI tool, `gem install rhc`, don't forget to run `rhc setup`.
+- If you have none yet generate a SSH keypar: `ssh-keygen`.
+- Create the application:
+  
+  ```bash
+  rhc app create diaspora \
+     ruby-1.9 mysql-5.5 \
+     'http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart'
+  ```
+  
+- If it asks you to upload your SSH key, answer yes.
+- `cd diaspora` to change into the new repository.
+- Run the following commands:
+  
+  ```bash
+  git remote add upstream git://github.com/MrZYX/diaspora-openshift.git
+  git fetch upstream
+  git reset --hard upstream/master
+  git  push -f origin master
+  ```
+  
 - Grab a coffee.
-- Wait until the apps status  says "Started". This takes quite some time.
 
 ## Configuration
-todo
+
+Configuration is done via environment variables. To change something
+from the default set them via `rhc env set`, see `rhc help env`. To see what's available,
+read `config/diaspora.yml.example`.
+
+### Adding yourself as an admin
+
+After you created an account on your new diaspora* pod, you can make
+yourself an admin with: `rhc ssh diaspora -- '/bin/bash -c "cd $OPENSHIFT_REPO_DIR; source .openshift/diaspora_configuration; bundle exec rails runner \\"Role.add_admin(User.where(username: \'yourusername\').person)\\""'`.
 
 
 ## Updating
-
-### First time setup
-
-You can also use this to get hold of a local copy so that you can modify your diaspora*.
-
-- If you have none yet generate a SSH keypar: `ssh-keygen`.
-- Grab `~/.ssh/id_rsa.pub` and add it at the [My account](https://openshift.redhat.com/app/account) page under "Public Keys".
-- Install [Git](http://git-scm.org) on your computer.
-- Goto [your applications](https://openshift.redhat.com/app/console/applications) and there to your Diaspora application.
-- Copy the "Git repository" URL
-- Run `git clone your_git_repository_url`
-- Go into it: `cd diaspora`.
-- Run `git remote add upstream git://github.com/MrZYX/diaspora-openshift.git`
-
-###  Every time you need to update
 
 - Go into your local clone.
 - Run `git pull upstream master`.
 - Run `git push origin master`.
 - It's time for another coffee.
-
-## Issues
-
-- There's a new secret token generated on every redeploy, so all users will get logged out on that.
-- There's no straight forward way to configure your pod.
-- There's no straight forward way to add yourself as an admin.

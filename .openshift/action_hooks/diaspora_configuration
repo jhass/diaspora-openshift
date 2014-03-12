@@ -1,6 +1,0 @@
-export OPENSHIFT=true \
-       RAILS_ENV="production" \
-       ENVIRONMENT_CERTIFICATE_AUTHORITIES="/etc/pki/tls/certs/ca-bundle.crt" \
-       ENVIRONMENT_URL="https://${OPENSHIFT_APP_DNS}/" \
-       REDIS_URL="unix://${OPENSHIFT_DATA_DIR}redis/redis.sock" \
-       ENVIRONMENT_SIDEKIQ_LOG="${OPENSHIFT_RUBY_LOG_DIR}/sidekiq_worker.log"
