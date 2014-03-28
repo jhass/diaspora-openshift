@@ -41,7 +41,7 @@ read `config/diaspora.yml.example`.
 ### Adding yourself as an admin
 
 After you created an account on your new diaspora* pod, you can make
-yourself an admin with: `rhc ssh diaspora -- '/bin/bash -c "cd $OPENSHIFT_REPO_DIR; source .openshift/diaspora_configuration; bundle exec rails runner \\"Role.add_admin(User.where(username: \'yourusername\').person)\\""'`.
+yourself an admin with: `rhc ssh diaspora -- '/bin/bash -c "cd $OPENSHIFT_REPO_DIR; source .openshift/diaspora_configuration; bundle exec rails runner \"Role.add_admin(User.where(username: \\\"your_username\\\").person)\""`.
 
 
 ## Updating
