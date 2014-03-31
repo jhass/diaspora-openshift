@@ -12,3 +12,18 @@
 # prevent your application from stopping cleanly or starting at all.
 # Application start and stop is subject to different timeouts
 # throughout the system.
+
+source "${OPENSHIFT_REPO_DIR}.openshift/diaspora_configuration"
+
+if [ -f "${OPENSHIFT_DATA_DIR}sidekiq.pid" ]; then
+  if ! ps -p $(cat "${OPENSHIFT_DATA_DIR}sidekiq.pid") > /dev/null; then
+    rm "${OPENSHIFT_DATA_DIR}sidekiq.pid"
+  fi
+fi
+
+if [ ! -f "${OPENSHIFT_DATA_DIR}sidekiq.pid" ]; then
+  cd "${OPENSHIFT_REPO_DIR}"
+  echo "exec sidekiq -d -P '${OPENSHIFT_DATA_DIR}sidekiq.pid' -L '$ENVIRONMENT_SIDEKIQ_LOG'"
+  bundle exec "sidekiq -d -P '${OPENSHIFT_DATA_DIR}sidekiq.pid' -L '$ENVIRONMENT_SIDEKIQ_LOG'"
+fi
+

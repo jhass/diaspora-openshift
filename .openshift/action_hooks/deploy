@@ -57,7 +57,4 @@ if [ -f "${OPENSHIFT_DATA_DIR}sidekiq.pid" ]; then
    rm "${OPENSHIFT_DATA_DIR}sidekiq.pid"
 fi
 
-echo "exec sidekiq -d -P '${OPENSHIFT_DATA_DIR}sidekiq.pid' -L '$ENVIRONMENT_SIDEKIQ_LOG'"
-bundle exec "sidekiq -d -P '${OPENSHIFT_DATA_DIR}sidekiq.pid' -L '$ENVIRONMENT_SIDEKIQ_LOG'"
-
 popd > /dev/null

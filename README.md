@@ -17,17 +17,18 @@ This repository contains modifications to diaspora* for easy deployment.
   rhc app create diaspora \
      ruby-1.9 mysql-5.5 \
      'http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart'
+
   ```
   
 - If it asks you to upload your SSH key, answer yes.
-- `cd diaspora` to change into the new repository.
 - Run the following commands:
   
   ```bash
+  cd diaspora
   git remote add upstream git://github.com/MrZYX/diaspora-openshift.git
   git fetch upstream
   git reset --hard upstream/master
-  git  push -f origin master
+  git push -f origin master
   ```
   
 - Grab a coffee.
