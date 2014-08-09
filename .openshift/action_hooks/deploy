@@ -49,8 +49,10 @@ fi
 
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 
-echo "exec rake db:migrate assets:precompile RAILS_ENV=${RAILS_ENV:-production}"
-bundle exec rake db:migrate assets:precompile RAILS_ENV=${RAILS_ENV:-production}
+echo "exec rake db:migrate assets:clean assets:precompile RAILS_ENV=${RAILS_ENV:-production}"
+bundle exec rake db:migrate assets:clean assets:precompile RAILS_ENV=${RAILS_ENV:-production}
+echo "exec bundle clean"
+bundle clean
 
 if [ -f "${OPENSHIFT_DATA_DIR}sidekiq.pid" ]; then
    kill $(cat "${OPENSHIFT_DATA_DIR}sidekiq.pid") || true
