@@ -15,7 +15,7 @@ This repository contains modifications to diaspora* for easy deployment.
   
   ```bash
   rhc app create diaspora \
-     ruby-1.9 mysql-5.5 \
+     ruby-2.0 mysql-5.5 \
      'http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart'
 
   ```
@@ -25,7 +25,7 @@ This repository contains modifications to diaspora* for easy deployment.
   
   ```bash
   cd diaspora
-  git remote add upstream git://github.com/MrZYX/diaspora-openshift.git
+  git remote add upstream git://github.com/jhass/diaspora-openshift.git
   git fetch upstream
   git reset --hard upstream/master
   git push -f origin master
