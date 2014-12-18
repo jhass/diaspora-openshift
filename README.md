@@ -6,7 +6,7 @@ diaspora* is a privacy-aware, personally-controlled, do-it-all open source socia
 
 This repository contains modifications to diaspora* for easy deployment.
 
-## Installtion
+## Installation
 
 - Create an account on [OpenShift](https://openshift.redhat.com/app/)
 - Install the CLI tool, `gem install rhc`, don't forget to run `rhc setup`.
