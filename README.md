@@ -8,17 +8,17 @@ This repository contains modifications to diaspora* for easy deployment.
 - Install the CLI tool, `gem install rhc`, don't forget to run `rhc setup`.
 - If you have none yet generate a SSH keypar: `ssh-keygen`.
 - Create the application:
-  
+
   ```bash
   rhc app create diaspora \
-     ruby-2.0 mysql-5.5 \
+     ruby-2.0 postgresql-9.2 \
      'http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart'
 
   ```
-  
+
 - If it asks you to upload your SSH key, answer yes.
 - Run the following commands:
-  
+
   ```bash
   cd diaspora
   git remote add upstream git://github.com/jhass/diaspora-openshift.git
@@ -26,7 +26,7 @@ This repository contains modifications to diaspora* for easy deployment.
   git reset --hard upstream/master
   git push -f origin master
   ```
-  
+
 - Grab a coffee.
 
 ## Configuration
@@ -42,6 +42,12 @@ yourself an admin with: `rhc ssh diaspora -- '/bin/bash -c "cd $OPENSHIFT_REPO_D
 
 
 ## Updating
+
+**Note**: Unfortunately due to changes in diaspora* 0.5, it got incompatible with
+the MySQL installed on OpenShift, upgrading diaspora* 0.4 installed from this
+repository to diaspora* 0.5 is not possible! Instead make a backup of your MySQL
+database, delete your app and create a new one with the same name as described above,
+then import the backup of your MySQL database into PostgreSQL.
 
 - Go into your local clone.
 - Run `git pull upstream master`.
