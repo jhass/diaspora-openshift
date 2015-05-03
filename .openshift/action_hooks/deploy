@@ -5,6 +5,7 @@
 # ruby, etc.
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source ${OPENSHIFT_RUBY_DIR}/lib/ruby_context
 source "${OPENSHIFT_REPO_DIR}.openshift/diaspora_configuration"
 
 set -e
@@ -49,14 +50,15 @@ fi
 
 pushd ${OPENSHIFT_REPO_DIR} > /dev/null
 
-echo "exec rake db:migrate assets:clean assets:precompile RAILS_ENV=${RAILS_ENV:-production}"
-bundle exec rake db:migrate assets:clean assets:precompile RAILS_ENV=${RAILS_ENV:-production}
-echo "exec bundle clean"
-bundle clean
-
 if [ -f "${OPENSHIFT_DATA_DIR}sidekiq.pid" ]; then
    kill $(cat "${OPENSHIFT_DATA_DIR}sidekiq.pid") || true
    rm "${OPENSHIFT_DATA_DIR}sidekiq.pid"
 fi
+
+echo "bundle exec rake db:migrate assets:clean assets:precompile RAILS_ENV=${RAILS_ENV:-production}"
+ruby_with_nodejs_context "bundle exec rake db:migrate assets:clean assets:precompile RAILS_ENV=${RAILS_ENV:-production}"
+echo "bundle clean"
+bundle clean
+
 
 popd > /dev/null

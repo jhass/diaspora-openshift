@@ -23,7 +23,7 @@ fi
 
 if [ ! -f "${OPENSHIFT_DATA_DIR}sidekiq.pid" ]; then
   cd "${OPENSHIFT_REPO_DIR}"
-  echo "exec sidekiq -d -P '${OPENSHIFT_DATA_DIR}sidekiq.pid' -L '$ENVIRONMENT_SIDEKIQ_LOG'"
+  echo "bundle exec sidekiq -d -P '${OPENSHIFT_DATA_DIR}sidekiq.pid' -L '$ENVIRONMENT_SIDEKIQ_LOG'"
   bundle exec "sidekiq -d -P '${OPENSHIFT_DATA_DIR}sidekiq.pid' -L '$ENVIRONMENT_SIDEKIQ_LOG'"
 fi
 
