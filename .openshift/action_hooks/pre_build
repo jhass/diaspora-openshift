@@ -5,6 +5,7 @@
 # could be python, php, ruby, etc.
 
 source $OPENSHIFT_CARTRIDGE_SDK_BASH
+source ${OPENSHIFT_RUBY_DIR}/lib/ruby_context
 
 if [ -z "$BUNDLE_WITHOUT" ]; then
   export BUNDLE_WITHOUT='development test'
@@ -12,3 +13,6 @@ if [ -z "$BUNDLE_WITHOUT" ]; then
     set_env_var 'BUNDLE_WITHOUT' "$BUNDLE_WITHOUT" $OPENSHIFT_HOMEDIR/.env/user_vars
   fi
 fi
+
+# Update bundler to the latest and greatest
+ruby_with_nodejs_context "gem update bundler"
