@@ -1,9 +1,5 @@
 # diaspora* for OpenShift
 
-diaspora* is a privacy-aware, personally-controlled, do-it-all open source social network. Check out our [project site](https://diasporafoundation.org) and the [main repository](https://github.com/diaspora/diaspora).
-
-[OpenShift](https://openshift.redhat.com/app/) is a hosting platform by RedHat.
-
 This repository contains modifications to diaspora* for easy deployment.
 
 ## Installation
