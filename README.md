@@ -1,5 +1,8 @@
 # diaspora* for OpenShift
 
+## This is currently broken until OpenShift adds support for Rails 4.2!
+## See https://bugzilla.redhat.com/show_bug.cgi?id=1184179
+
 This repository contains modifications to diaspora* for easy deployment.
 
 ## Installation
