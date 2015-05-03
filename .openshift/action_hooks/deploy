@@ -58,7 +58,7 @@ fi
 echo "bundle exec rake db:migrate assets:clean assets:precompile RAILS_ENV=${RAILS_ENV:-production}"
 ruby_with_nodejs_context "bundle exec rake db:migrate assets:clean assets:precompile RAILS_ENV=${RAILS_ENV:-production}"
 echo "bundle clean"
-bundle clean
+ruby_with_nodejs_context "bundle clean"
 
 
 popd > /dev/null
