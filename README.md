@@ -13,9 +13,7 @@ This repository contains modifications to diaspora* for easy deployment.
 - Create the application:
 
   ```bash
-  rhc app create diaspora \
-     ruby-2.0 postgresql-9.2 \
-     'http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart'
+  rhc app create diaspora ruby-2.0 postgresql-9.2 'http://cartreflect-claytondev.rhcloud.com/reflect?github=smarterclayton/openshift-redis-cart'
 
   ```
 
