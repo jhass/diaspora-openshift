@@ -1,8 +1,5 @@
 # diaspora* for OpenShift
 
-## This is currently broken until OpenShift adds support for Rails 4.2!
-## See https://bugzilla.redhat.com/show_bug.cgi?id=1184179
-
 This repository contains modifications to diaspora* for easy deployment.
 
 ## Installation
@@ -29,6 +26,16 @@ This repository contains modifications to diaspora* for easy deployment.
   ```
 
 - Grab a coffee.
+
+- Now, do the following command:
+  ```bash
+  rhc ssh diaspora
+  cd app-root
+  gem install rack
+  exit
+  ```
+  
+  Done, access your pod and be happy!
 
 ## Configuration
 
