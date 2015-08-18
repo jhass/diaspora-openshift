@@ -16,3 +16,6 @@ fi
 
 # Update bundler to the latest and greatest
 ruby_with_nodejs_context "gem update bundler"
+
+cd
+cd app-root && gem install rack
